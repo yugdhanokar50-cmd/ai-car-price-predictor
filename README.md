@@ -6,7 +6,7 @@
 ![ML Dependencies](https://img.shields.io/badge/ML%20Dependencies-None%20(Zero%20Overhead)-success)
 ![Status](https://img.shields.io/badge/College%20Lab-Viva%20Ready-purple)
 
-A comprehensive Python and Web laboratory project that estimates the fair resale market price of used cars using a **Deterministic Rule-Based AI Expert System / Heuristic Algorithm**. It requires **zero machine learning libraries** (no `scikit-learn`, `TensorFlow`, or `PyTorch`), making it lightweight, 100% explainable, and easy to present in college lab exams and viva voce evaluations.
+A comprehensive Python and Web laboratory project that estimates the fair resale market price of used cars using a **Deterministic Rule-Based AI Expert System / Heuristic Algorithm**. 
 
 ---
 
