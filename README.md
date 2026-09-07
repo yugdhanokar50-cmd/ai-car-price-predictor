@@ -1,684 +1,429 @@
-# 🚗 AI Car Price Predictor
-### Rule-Based Expert System for Used Car Valuation
+# 🚗 AI Car Price Predictor (Rule-Based Expert System)
 
-<p align="center">
+![Python](https://img.shields.io/badge/Python-3.7%2B-blue?logo=python)
+![Web](https://img.shields.io/badge/Frontend-HTML5%20%7C%20CSS3%20%7C%20ES6%20JS-orange?logo=javascript)
+![AI Paradigm](https://img.shields.io/badge/AI%20Paradigm-Rule--Based%20Expert%20System-brightgreen)
+![ML Dependencies](https://img.shields.io/badge/ML%20Dependencies-None%20(Zero%20Overhead)-success)
+![Status](https://img.shields.io/badge/College%20Lab-Viva%20Ready-purple)
 
-![Python](https://img.shields.io/badge/Python-3.7%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-ES6-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-![AI](https://img.shields.io/badge/AI-Rule--Based%20Expert%20System-00C853?style=for-the-badge)
-![ML](https://img.shields.io/badge/ML-Not%20Required-4CAF50?style=for-the-badge)
-![Status](https://img.shields.io/badge/Status-College%20Lab%20Ready-8E24AA?style=for-the-badge)
-
-</p>
-
-<p align="center">
-  <b>🚘 Explainable • Deterministic • Lightweight • Zero ML Dependencies</b>
-</p>
+A comprehensive Python and Web laboratory project that estimates the fair resale market price of used cars using a **Deterministic Rule-Based AI Expert System / Heuristic Algorithm**. It requires **zero machine learning libraries** (no `scikit-learn`, `TensorFlow`, or `PyTorch`), making it lightweight, 100% explainable, and easy to present in college lab exams and viva voce evaluations.
 
 ---
 
-## 📌 Quick Navigation
-
-- [🎯 Project Overview](#-project-overview)
-- [✨ Features](#-features)
-- [🧠 AI Concept](#-ai-concept)
-- [🏗️ System Architecture](#️-system-architecture)
-- [⚙️ How the Prediction Works](#️-how-the-prediction-works)
-- [📐 Mathematical Model](#-mathematical-model)
-- [🔄 Prediction Flow](#-prediction-flow)
-- [🌐 Web Application](#-web-application)
-- [💻 Python CLI](#-python-cli)
-- [🧪 Test Cases](#-test-cases)
-- [🎓 Viva Questions](#-viva-questions)
-- [📁 Project Structure](#-project-structure)
-- [🚀 Installation & Setup](#-installation--setup)
-- [🔮 Future Improvements](#-future-improvements)
-- [👨‍💻 Authors](#-authors)
+## 📑 Table of Contents
+1. [Project Overview & Abstract](#-project-overview--abstract)
+2. [AI Concept: Rule-Based AI vs Machine Learning](#-ai-concept-rule-based-ai-vs-machine-learning)
+3. [Architecture of the Expert System](#-architecture-of-the-expert-system)
+4. [Heuristic Algorithm & Mathematical Rules Matrix](#-heuristic-algorithm--mathematical-rules-matrix)
+5. [Visual Flowcharts](#-visual-flowcharts)
+6. [How to Run the Web Application on Localhost](#-how-to-run-the-web-application-on-localhost)
+7. [How to Run the Python CLI Program](#-how-to-run-the-python-cli-program)
+8. [Sample Test Cases & Execution Logs](#-sample-test-cases--execution-logs)
+9. [College Viva Voce Q&A Preparation](#-college-viva-voce-qa-preparation)
+10. [Repository File Structure](#-repository-file-structure)
 
 ---
 
-# 🎯 Project Overview
+## 📌 Project Overview & Abstract
 
-**AI Car Price Predictor** is a lightweight **Rule-Based Artificial Intelligence Expert System** designed to estimate the fair resale price of used cars.
+In real-world automotive valuation, used car prices depend on deterministic market rules, structured depreciation curves, odometer wear brackets, fuel market dynamics, and ownership transfer history. 
 
-Unlike Machine Learning systems that learn patterns from historical datasets, this project uses a predefined **Knowledge Base** and a collection of deterministic **IF-THEN heuristic rules**.
+While statistical Machine Learning models treat price prediction as a "black box" that requires vast datasets, this project demonstrates **Symbolic / Rule-Based Artificial Intelligence (Expert Systems)**. It encodes domain expertise directly into a structured **Knowledge Base** and evaluates user parameters using an **Inference Engine** with full transparency and step-by-step reasoning.
 
-The system evaluates:
-
-- 🚘 Brand
-- 🚗 Model
-- 📅 Manufacturing year
-- 🛣️ Kilometers driven
-- ⛽ Fuel type
-- 👤 Number of owners
-- 💰 Original ex-showroom price
-
-It then calculates an estimated resale price with a complete explanation of how the final value was obtained.
+### Key Highlights:
+- **Dual Interface**: Runs both as an interactive **Web Application** (with dark-mode glassmorphism and real-time sliders) and as a **Python CLI Script**.
+- **100% Explainable**: Displays an exact rupee-by-rupee deduction breakdown for every heuristic rule applied.
+- **Zero External Dependencies**: Works out-of-the-box with Python standard libraries and vanilla web technologies.
+- **Resilience & Safety**: Enforces input validation and a minimum residual asset floor (8% scrap value) to prevent negative or zero valuations.
 
 ---
 
-# ✨ Features
+## 🧠 AI Concept: Rule-Based AI vs Machine Learning
 
-| Feature | Description |
-|---|---|
-| 🧠 Rule-Based AI | Uses symbolic AI and deterministic heuristics |
-| 💰 Price Prediction | Estimates used-car resale value |
-| 🔍 Explainable AI | Shows every deduction and adjustment |
-| 🌐 Web Interface | Interactive HTML/CSS/JavaScript dashboard |
-| 💻 CLI Interface | Python terminal-based implementation |
-| ⚡ Lightweight | No ML libraries required |
-| 📦 Zero Dependencies | Uses Python standard library |
-| 🛡️ Input Validation | Prevents invalid values and crashes |
-| 📉 Depreciation Engine | Calculates age-based depreciation |
-| 🛣️ Mileage Analysis | Applies odometer wear rules |
-| ⛽ Fuel Adjustment | Adjusts value according to fuel type |
-| 👥 Ownership Penalty | Considers number of previous owners |
-| 🔒 Safety Floor | Maintains minimum residual value |
+### What is Rule-Based AI?
+> *"This project implements a **Rule-Based AI Expert System**. Instead of training an opaque statistical model on historical datasets, it uses predefined domain knowledge and sequential IF-THEN heuristic rules to evaluate car characteristics (such as vehicle age, odometer mileage, fuel efficiency, and ownership history) and calculate the resale valuation."*
+
+### Detailed Comparison Table:
+
+| Feature | Rule-Based AI (Expert System) 🏆 *(Used Here)* | Machine Learning (ML) Models |
+| :--- | :--- | :--- |
+| **Decision Mechanism** | Deterministic domain rules & heuristics | Statistical pattern matching & weights |
+| **Explainability** | **100% Transparent** (Every step is traceable) | Opaque / "Black-Box" (Hard to debug) |
+| **Training Data** | **Zero Data Required** (Uses knowledge base) | Requires large CSV / database files |
+| **Hardware Overhead** | Minimal (Runs instantly on any CPU) | High (Requires GPU / heavy RAM for training) |
+| **Overfitting Risk** | None (Rules are consistent and bounded) | High risk of overfitting on small datasets |
+| **Suitability for Lab** | **Ideal for college mini-projects & viva** | Complex to explain internal math in viva |
 
 ---
 
-# 🧠 AI Concept
+## 🏗️ Architecture of the Expert System
 
-## What type of AI is this?
+The system follows the classical three-tier Expert System architecture:
 
-This project implements a:
+```
+                  +-----------------------------------+
+                  |            USER INPUTS            |
+                  |  Brand, Model, Year, Km, Fuel,    |
+                  |  Previous Owners, Custom Price    |
+                  +-----------------+-----------------+
+                                    |
+                                    v
++-----------------------+   +-------------------+   +-------------------------+
+|    KNOWLEDGE BASE     |-->| INFERENCE ENGINE  |-->|  EXPLANATION FACILITY   |
+| - Brand Price Tiers   |   | - Forward-chain   |   | - Rupee-level breakdown |
+| - Depreciation curves |   |   IF-THEN rules   |   | - Retention percentage  |
+| - Residual floors     |   | - Safety clamp    |   | - AI market insights    |
++-----------------------+   +-------------------+   +-------------------------+
+                                    |
+                                    v
+                  +-----------------------------------+
+                  |          PREDICTED PRICE          |
+                  |    ₹ INR & Lakhs Valuation        |
+                  +-----------------------------------+
+```
 
-> **Rule-Based AI Expert System**
+1. **Knowledge Base**: Contains domain benchmark prices for economy, mid-range, premium, and luxury brand tiers.
+2. **Inference Engine**: Executes forward-chaining rules in sequential stages:
+   $$\text{Base Price} \longrightarrow \text{Age Drop} \longrightarrow \text{Mileage Wear} \longrightarrow \text{Fuel Adj.} \longrightarrow \text{Owner Penalty} \longrightarrow \text{Safety Floor}$$
+3. **Explanation Facility**: Translates numeric deductions into human-readable explanations displayed on the CLI and Web dashboard.
 
-It belongs to the **Symbolic AI** family.
+---
 
-Instead of learning from data, the system stores domain knowledge as explicit rules.
+## ⚙️ Heuristic Algorithm & Mathematical Rules Matrix
 
-### Example
+### Step 1: Base Price Benchmark Lookup ($B$)
+The algorithm searches the Knowledge Base for the brand benchmark:
+- **Economy Brands** (Maruti, Renault, Nissan): ₹6,00,000 – ₹6,50,000
+- **Mid-Range Brands** (Hyundai, Tata, Ford): ₹7,50,000 – ₹8,00,000
+- **Upper Mid-Range** (Honda, Mahindra, Kia, VW, Skoda): ₹9,50,000 – ₹11,00,000
+- **Premium / SUV** (Toyota, MG): ₹12,00,000
+- **Luxury Segment** (BMW, Audi, Mercedes-Benz, Jaguar, Volvo): ₹32,00,000 – ₹40,00,000
+- **User Override**: If the user provides the exact original ex-showroom price, that value takes precedence.
 
-```text
-IF vehicle_age <= 1
-THEN apply 15% depreciation
+---
 
-IF mileage > 100000
-THEN apply 20% mileage depreciation
+### Step 2: Vehicle Age Depreciation ($D_{\text{age}}$)
+Calculated based on manufacturing age ($\text{Age} = \text{Current Year} - \text{Manufacturing Year}$):
 
-IF fuel_type == "Electric"
-THEN increase value by 8%
+$$\text{Depreciation \%} = \begin{cases} 
+5\% & \text{if Age} = 0 \text{ (Same-year showroom exit)} \\
+15\% & \text{if Age} = 1 \\
+15\% + (\text{Age} - 1) \times 8\% & \text{if } 2 \le \text{Age} \le 5 \\
+15\% + 32\% + (\text{Age} - 5) \times 5\% & \text{if } 6 \le \text{Age} \le 10 \\
+15\% + 32\% + 25\% + (\text{Age} - 10) \times 3\% & \text{if Age} > 10 
+\end{cases}$$
 
-IF owners == 2
-THEN apply 7% ownership penalty
+*Note: Maximum age depreciation is capped at $80\%$ to prevent total devaluation.*
 
-The inference engine evaluates these rules sequentially to produce the final valuation.
+$$P_1 = \max(B \times 0.15, B - D_{\text{age}})$$
 
-🆚 Rule-Based AI vs Machine Learning
-Parameter	Rule-Based AI 🏆	Machine Learning
-Training Dataset	❌ Not required	✅ Required
-Explainability	⭐⭐⭐⭐⭐	⭐⭐
-Prediction Speed	Very fast	Fast after training
-Hardware	Basic CPU	Can require significant resources
-Dependencies	Minimal	Often many
-Deterministic	✅ Yes	❌ Not necessarily
-Overfitting	❌ No training overfit	⚠️ Possible
-Rule Modification	Easy	Requires retraining
-College Viva	⭐⭐⭐⭐⭐	⭐⭐⭐
+---
 
-🏗️ System Architecture
-The project follows the classical architecture of an Expert System.
+### Step 3: Odometer Mileage Wear Depreciation ($D_{\text{mileage}}$)
+Evaluates mechanical wear and tear based on total kilometers driven:
 
-👤 User Input
-✅ Input Validation
-(🧠 Knowledge Base)
-⚙️ Inference Engine
-📊 Price Calculation
-🔍 Explanation Facility
-💰 Final Predicted Price
-🌐 Web / 💻 CLI Output
-Main Components
-1. 🧠 Knowledge Base
-Contains domain-specific information such as:
+| Odometer Range (km) | Wear Category | Depreciation Rate | Heuristic Justification |
+| :--- | :--- | :--- | :--- |
+| **0 – 20,000 km** | Minimal Wear | **2%** | Almost new engine and tires |
+| **20,001 – 50,000 km** | Moderate Wear | **6%** | Standard urban commuting |
+| **50,001 – 100,000 km** | Average Wear | **12%** | Normal suspension and brake cycle |
+| **100,001 – 150,000 km** | High Wear | **20%** | Approaching major maintenance service |
+| **> 150,000 km** | Heavy Wear | **28%** | Severe wear on powertrain & gearbox |
 
-Brand benchmark prices
-Depreciation rates
-Mileage brackets
-Fuel adjustments
-Ownership penalties
-Minimum residual value
-2. ⚙️ Inference Engine
-Applies the rules sequentially.
+$$P_2 = \max(B \times 0.10, P_1 - D_{\text{mileage}})$$
 
-Base Price
-    ↓
-Age Depreciation
-    ↓
-Mileage Depreciation
-    ↓
-Fuel Adjustment
-    ↓
-Ownership Penalty
-    ↓
-Safety Floor
-    ↓
-Final Price
+---
 
-3. 🔍 Explanation Facility
-The system explains:
+### Step 4: Fuel Type Market Adjustment ($F_{\text{fuel}}$)
+Applies a market value multiplier based on fuel efficiency and powertrain demand:
 
-Base Price:              ₹8,00,000
-Age Depreciation:       -₹3,20,000
-Mileage Adjustment:       -₹48,000
-Fuel Adjustment:          +₹22,400
-Ownership Penalty:        -₹30,240
------------------------------------
-Predicted Price:         ₹4,24,160
+| Fuel Type | Adjustment Factor | Market Reasoning |
+| :--- | :--- | :--- |
+| **Diesel** | **+5% Value** | High highway fuel efficiency, torque, and engine durability |
+| **Petrol** | **0% (Baseline)** | Standard market baseline for passenger cars |
+| **CNG** | **-3% Discount** | Lower running cost offset by trunk space loss & engine dry-run |
+| **Electric (EV)** | **+8% Premium** | Modern green tech, zero tailpipe emissions, low running cost |
+| **Hybrid** | **+6% Premium** | Dual-powertrain fuel economy and low emissions |
 
-This makes the system transparent and auditable.
+$$P_3 = P_2 + F_{\text{fuel}}$$
 
-⚙️ How the Prediction Works
-The prediction consists of six major stages.
+---
 
-1️⃣ Base Price Lookup
-The system first determines a benchmark price from the Knowledge Base.
+### Step 5: Ownership History Penalty ($P_{\text{owner}}$)
+Reflects buyer trust and maintenance record continuity:
 
-Brand Category	Example Brands	Approx. Benchmark
-Economy	Maruti, Renault, Nissan	₹6–6.5 Lakh
-Mid-Range	Hyundai, Tata, Ford	₹7.5–8 Lakh
-Upper Mid-Range	Honda, Mahindra, Kia, VW, Skoda	₹9.5–11 Lakh
-Premium / SUV	Toyota, MG	₹12 Lakh
-Luxury	BMW, Audi, Mercedes, Jaguar, Volvo	₹32–40 Lakh
+| Ownership Bracket | Penalty Rate | Impact |
+| :--- | :--- | :--- |
+| **1st Owner (Single Hand)** | **0% Penalty** | High buyer trust and consistent service history |
+| **2nd Owner** | **-7% Discount** | Standard secondary ownership transfer drop |
+| **3rd Owner** | **-15% Discount** | Moderate wear ambiguity and service gaps |
+| **4+ Owners** | **-25% Discount** | Significant multi-hand resale depreciation |
 
-If the user knows the original ex-showroom price, that value overrides the benchmark.
+$$P_4 = P_3 - P_{\text{owner}}$$
 
-📅 2️⃣ Age Depreciation
-Vehicle age is calculated as:
+---
 
-Age = Current Year - Manufacturing Year
+### Step 6: Minimum Residual Asset Value Floor
+To ensure the vehicle always retains scrap and spare parts value:
 
-Depreciation Rules
-Vehicle Age	Depreciation
-0 years	5%
-1 year	15%
-2–5 years	15% + 8% per additional year
-6–10 years	47% + 5% per additional year
->10 years	72% + 3% per additional year
+$$P_{\text{final}} = \max(P_4, B \times 0.08)$$
 
-Maximum age depreciation is capped at:
+---
 
-80%
+## 📊 Visual Flowcharts
 
-This prevents the vehicle value from being completely eliminated.
+### 1. Mermaid Flowchart
+```mermaid
+graph TD
+    Start([Start System]) --> Inp[Input: Brand, Model, Year, Km, Fuel, Owners]
+    Inp --> Val{Are Inputs Valid?}
+    Val -- No --> ReInp[Display Error & Re-prompt]
+    ReInp --> Inp
+    Val -- Yes --> R1[Rule 1: Lookup Brand Base Price in Knowledge Base]
+    R1 --> R2[Rule 2: Deduct Age Depreciation % from Base Price]
+    R2 --> R3[Rule 3: Deduct Mileage Wear % based on Kilometers]
+    R3 --> R4[Rule 4: Apply Fuel Type Multiplier +5% / -3% / +8%]
+    R4 --> R5[Rule 5: Deduct Ownership History Penalty 0% / 7% / 15% / 25%]
+    R5 --> R6{Price < 8% Base Price?}
+    R6 -- Yes --> Floor[Apply Minimum Residual Scrap Floor 8%]
+    R6 -- No --> Final[Calculate Final Price]
+    Floor --> Disp[Display Predicted Price in ₹ INR & Lakhs]
+    Final --> Disp
+    Disp --> Expl[Display Transparent AI Explanation Breakdown]
+    Expl --> Loop{Evaluate Another Vehicle?}
+    Loop -- Yes --> Inp
+    Loop -- No --> End([End System])
+```
 
-🛣️ 3️⃣ Mileage Wear
-Kilometers	Wear Level	Deduction
-0–20,000	🟢 Minimal	2%
-20,001–50,000	🟢 Moderate	6%
-50,001–100,000	🟡 Average	12%
-100,001–150,000	🟠 High	20%
->150,000	🔴 Heavy	28%
+### 2. ASCII Architecture Diagram
+```
+                     +---------------------------------------+
+                     |                 START                 |
+                     +-------------------+-------------------+
+                                         |
+                                         v
+                     +---------------------------------------+
+                     |         PROMPT VEHICLE INPUTS         |
+                     | (Brand, Model, Year, Km, Fuel, Owner) |
+                     +-------------------+-------------------+
+                                         |
+                                         v
+                     +---------------------------------------+
+                     |         VALIDATE USER INPUTS          |
+                     +-------------------+-------------------+
+                                    /         \
+                             [Invalid]       [Valid]
+                                /                 \
+                     [Display Error]      [Step 1: Fetch Base Price]
+                                                      |
+                                                      v
+                                         [Step 2: Age Depreciation]
+                                                      |
+                                                      v
+                                         [Step 3: Mileage Wear]
+                                                      |
+                                                      v
+                                         [Step 4: Fuel Multiplier]
+                                                      |
+                                                      v
+                                         [Step 5: Owner History]
+                                                      |
+                                                      v
+                                         [Enforce 8% Safety Floor]
+                                                      |
+                                                      v
+                                         [Display Price & AI Steps]
+                                                      |
+                                                      v
+                                         [Predict Another? (y/n)]
+                                            /                  \
+                                         (Yes)                (No)
+                                          /                      \
+                                  [Loop to Start]              [ END ]
+```
 
-The mileage rule represents increasing mechanical wear as the vehicle accumulates kilometers.
+---
 
-⛽ 4️⃣ Fuel Adjustment
-Fuel Type	Adjustment
-🛢️ Diesel	+5%
-⛽ Petrol	0%
-🔵 CNG	-3%
-⚡ Electric	+8%
-🔋 Hybrid	+6%
+## 🌐 How to Run the Web Application on Localhost
 
-Example:
+The repository includes a web interface with real-time reactive sliders, quick presets, and an AI Rulebook modal.
 
-Current value = ₹5,00,000
+### Method 1: Using Python Built-in HTTP Server (Recommended)
 
-Electric adjustment
-= ₹5,00,000 × 8%
+1. Open your terminal / Command Prompt / PowerShell in the project directory:
+   ```bash
+   cd c:\Users\AAYUSH\OneDrive\Desktop\yugd
+   ```
 
-= +₹40,000
+2. Start the lightweight local server:
+   ```bash
+   python -m http.server 8000
+   ```
 
-Adjusted value
-= ₹5,40,000
+3. Open your web browser and navigate to:
+   ```
+   http://localhost:8000
+   ```
+   *(or `http://127.0.0.1:8000`)*
 
-👥 5️⃣ Ownership History
-Owners	Penalty
-1st Owner	0%
-2nd Owner	-7%
-3rd Owner	-15%
-4+ Owners	-25%
+> [!TIP]
+> If port `8000` is already in use by another application on your PC, you can start it on port `3000` or `5500`:
+> ```bash
+> python -m http.server 3000
+> ```
+> Then open `http://localhost:3000` in your browser.
 
-The assumption is that vehicles with fewer ownership transfers may have stronger buyer confidence and clearer service history.
+---
 
-🛡️ 6️⃣ Residual Value Floor
-The system never allows the predicted value to fall below:
+### Method 2: Direct File Open (Zero Server Required)
+Because the web app uses pure HTML5, CSS3, and Vanilla JavaScript with no external backend build step:
+- Navigate to the project folder `yugd/` in Windows File Explorer.
+- Double-click **`index.html`** to open it directly in Chrome, Edge, Brave, or Firefox.
 
-8% of the base price
+---
 
-Formula:
+### Method 3: Using VS Code Live Server Extension
+- Open the project folder in **Visual Studio Code**.
+- Right-click `index.html` and click **"Open with Live Server"**.
+- The page will automatically launch at `http://127.0.0.1:5500/index.html`.
 
-Final Price = max(Current Price, Base Price × 0.08)
+---
 
-This represents residual value such as:
+## 💻 How to Run the Python CLI Program
 
-🔧 Spare parts
-♻️ Scrap value
-🚘 Structural components
-⚙️ Recoverable mechanical components
-📐 Mathematical Model
-Let:
+For college lab practical sessions where terminal execution is required:
 
-B = Base Price
-A = Age Depreciation
-M = Mileage Depreciation
-F = Fuel Adjustment
-O = Ownership Penalty
-
-The valuation pipeline is:
-
-P1 = B - A
-
-P2 = P1 - M
-
-P3 = P2 + F
-
-P4 = P3 - O
-
-Final Price = max(P4, B × 0.08)
-
-Overall Concept
-┌─────────────┐
-│ Base Price  │
-└──────┬──────┘
-       ↓
-┌─────────────┐
-│ Age Factor  │
-└──────┬──────┘
-       ↓
-┌─────────────┐
-│ Mileage     │
-└──────┬──────┘
-       ↓
-┌─────────────┐
-│ Fuel Factor │
-└──────┬──────┘
-       ↓
-┌─────────────┐
-│ Owner Factor│
-└──────┬──────┘
-       ↓
-┌─────────────┐
-│ 8% Floor    │
-└──────┬──────┘
-       ↓
-┌─────────────┐
-│Final Price  │
-└─────────────┘
-
-🔄 Prediction Flow
-No
-Yes
-Yes
-No
-Yes
-No
-[🚀 Start]
-📝 Enter Vehicle Details
-✅ Valid Input?
-❌ Display Error
-1️⃣ Find Base Price
-2️⃣ Calculate Age Depreciation
-3️⃣ Calculate Mileage Wear
-4️⃣ Apply Fuel Adjustment
-5️⃣ Apply Ownership Penalty
-💰 Below 8% Floor?
-🛡️ Apply Residual Floor
-📊 Calculate Final Price
-🔍 Generate Explanation
-🚘 Display Predicted Price
-🔁 Another Vehicle?
-[🏁 End]
-🌐 Web Application
-The project contains an interactive browser-based interface.
-
-Web Technologies
-HTML5
-   +
-CSS3
-   +
-Vanilla JavaScript ES6
-
-No React, Angular, Vue, Node.js or external framework is required.
-
-Web Features
-🎚️ Interactive vehicle controls
-📊 Real-time valuation
-🌙 Dark glassmorphism interface
-⚡ Instant rule evaluation
-📋 Explanation breakdown
-🚘 Quick vehicle presets
-📱 Responsive layout
-📖 AI Rulebook
-💻 Python CLI
-The project also contains a terminal-based Python implementation.
-
-Run:
-
+### 1. Run the Python Script:
+```bash
 python car_price_predictor.py
+```
 
-Example:
-
+### 2. Follow the Interactive Prompts:
+```text
 ======================================================================
         AI-POWERED USED CAR PRICE PREDICTOR
          (Heuristic Rule-Based Expert System)
 ======================================================================
-
 Please enter the car details below:
+----------------------------------------
+1. Enter Car Brand (e.g. Maruti Suzuki, Hyundai, Honda, Toyota): Hyundai
+2. Enter Car Model (e.g. Swift, City, Creta, Innova): Creta
+3. Enter Manufacturing Year (1990 to 2026): 2021
+4. Enter Total Kilometers Driven (0 to 500,000 km): 35000
+  Fuel Type Options:
+    [1] Petrol
+    [2] Diesel
+    [3] CNG
+    [4] Electric
+    [5] Hybrid
+  Select Fuel Type (1-5 or name): 2
+5. Enter Number of Previous Owners (1 to 10): 1
+Do you know the original ex-showroom new price? (y/N): n
+```
 
-Brand: Hyundai
-Model: Creta
-Manufacturing Year: 2021
-Kilometers Driven: 35000
-Fuel Type: Diesel
-Number of Owners: 1
-Original Ex-showroom Price: No
+---
 
-The system then generates:
+## 🧪 Sample Test Cases & Execution Logs
+
+### Case Study 1: Maruti Suzuki Swift (Petrol, 2nd Owner)
+```text
+----------------------------------------------------------------------
+                    VEHICLE DETAILS SUMMARY
+----------------------------------------------------------------------
+  * Brand             : Maruti Suzuki
+  * Model             : Swift
+  * Year              : 2018
+  * Age               : 8
+  * Kilometers        : 45,000 km
+  * Fuel              : Petrol
+  * Previous Owners   : 2
 
 ======================================================================
-                PREDICTED SELLING PRICE
+   PREDICTED SELLING PRICE: Rs. 193,440.00 INR
+   (Approx. Rs. 1.93 Lakhs)
 ======================================================================
 
-₹ XXXXXXX
-Approx. ₹ XX.XX Lakhs
+AI INFERENCE BREAKDOWN & EXPLANATION:
+----------------------------------------------------------------------
+  1. Base Price Benchmark
+    -> Matched knowledge base benchmark for 'Maruti Suzuki': Rs. 650,000.00
 
-AI INFERENCE BREAKDOWN
-----------------------
+  2. Vehicle Age Depreciation
+    -> Vehicle age is 8 year(s). Applied 62.0% age depreciation (-Rs. 403,000.00).
 
-1. Base Price Benchmark
-2. Vehicle Age Depreciation
-3. Mileage / Odometer Wear
-4. Fuel Type Adjustment
-5. Ownership History Factor
-6. Residual Value Check
+  3. Mileage / Odometer Wear
+    -> Moderate mileage (20k - 50k km): Applied 6.0% mileage depreciation (-Rs. 39,000.00).
 
-🚀 Installation & Setup
-Requirements
-Only Python is required for the CLI/local server.
+  4. Fuel Type Adjustment
+    -> Petrol engine: Standard baseline benchmark (0% adjustment).
 
-Python 3.7+
-Modern Web Browser
+  5. Ownership History Factor
+    -> Second Owner (2nd Hand): Moderate ownership transfer discount (-7%).
 
-No ML libraries are needed.
+  Status Note: All AI heuristic constraints and market factors evaluated successfully.
+----------------------------------------------------------------------
+```
 
-Option 1 — Run Web Application
-Clone/download the project and enter its directory:
+---
 
-cd yugd
+### Case Study 2: Toyota Innova Crysta (Diesel, 1st Owner)
+```text
+======================================================================
+   PREDICTED SELLING PRICE: Rs. 529,200.00 INR
+   (Approx. Rs. 5.29 Lakhs)
+======================================================================
+```
 
-Start Python's built-in HTTP server:
+---
 
-python -m http.server 8000
+## 🎓 College Viva Voce Q&A Preparation
 
-Open:
+#### Q1: What makes this an "Artificial Intelligence" project if it does not use Machine Learning?
+> **Answer:** Artificial Intelligence is broadly divided into two major branches:
+> 1. **Symbolic AI (Rule-Based Expert Systems)**: Uses explicit human knowledge, rules of inference, and heuristics.
+> 2. **Sub-symbolic AI (Machine Learning & Neural Networks)**: Uses statistical approximations learned from datasets.
+>
+> This project represents Symbolic AI / Expert Systems, which is one of the classic foundational pillars of Artificial Intelligence.
 
-http://localhost:8000
+#### Q2: What is the difference between the Knowledge Base and the Inference Engine in your project?
+> **Answer:** 
+> - The **Knowledge Base** stores facts and domain benchmarks (e.g. brand price tiers, standard depreciation percentages).
+> - The **Inference Engine** is the algorithm that executes forward-chaining `IF-THEN` logical rules on the user's inputs against the knowledge base to derive the price.
 
-Alternative Ports
-python -m http.server 3000
+#### Q3: Why is a Rule-Based Expert System suitable for used car pricing?
+> **Answer:** 
+> - **Explainability**: Every deduction (e.g. 62% age drop, ₹39,000 km deduction) is 100% transparent.
+> - **Zero Dependency**: Does not require training datasets, GPU resources, or heavy libraries.
+> - **Deterministic**: It guarantees consistent valuations without overfitting or dataset bias.
 
-or:
+#### Q4: How does your algorithm prevent the price from dropping to negative or zero for very old cars?
+> **Answer:** The algorithm incorporates two safety clamps:
+> 1. Maximum age depreciation is capped at **80%**.
+> 2. A safety **Residual Asset Value Floor (8% of base price)** is enforced, representing the structural scrap and spare parts value of the vehicle.
 
-python -m http.server 5500
+#### Q5: How are invalid inputs handled in your implementation?
+> **Answer:** The program uses dedicated validation routines (`get_valid_int`, `get_valid_float`, `get_valid_fuel_type`) with `try-except` blocks and range boundaries (e.g. Year between 1990 and Current Year, Km between 0 and 500,000) to prevent crashes.
 
-Option 2 — Open HTML Directly
-Simply open:
+---
 
-index.html
+## 📁 Repository File Structure
 
-in:
-
-Chrome
-Edge
-Firefox
-Brave
-No backend is required for the frontend.
-
-Option 3 — VS Code Live Server
-Open the project in VS Code.
-Open index.html.
-Right-click.
-Select Open with Live Server.
-🧪 Test Cases
-Test Case 1 — Maruti Suzuki Swift
-Brand       : Maruti Suzuki
-Model       : Swift
-Year        : 2018
-Mileage     : 45,000 km
-Fuel        : Petrol
-Owners      : 2
-
-Expected output:
-
-Predicted Price:
-₹1,93,440
-
-Approx:
-₹1.93 Lakhs
-
-Rule Breakdown
-Base Price                 ₹6,50,000
-
-Age Depreciation -62%     -₹4,03,000
-
-Mileage Depreciation -6%    -₹39,000
-
-Fuel Adjustment               0%
-
-Ownership Penalty             -7%
-
-Final Price               ₹1,93,440
-
-Test Case 2 — Toyota Innova Crysta
-Brand       : Toyota
-Model       : Innova Crysta
-Fuel        : Diesel
-Owners      : 1
-
-Example predicted output:
-
-₹5.29 Lakhs
-
-🎓 Viva Questions
-<details> <summary><b>Q1. Why is this an AI project without Machine Learning?</b></summary>
-Artificial Intelligence is broader than Machine Learning.
-
-This project uses Symbolic AI, specifically a Rule-Based Expert System. It represents domain knowledge using explicit rules and uses an inference engine to derive conclusions.
-
-</details>
-<details> <summary><b>Q2. What is the Knowledge Base?</b></summary>
-The Knowledge Base stores domain-specific facts and rules such as:
-
-Brand prices
-Depreciation percentages
-Mileage brackets
-Fuel adjustments
-Ownership penalties
-Residual value limits
-</details>
-<details> <summary><b>Q3. What is the Inference Engine?</b></summary>
-The Inference Engine applies the rules stored in the Knowledge Base to the user's vehicle information and derives the predicted price.
-
-</details>
-<details> <summary><b>Q4. What inference strategy is used?</b></summary>
-The project uses a sequential forward-chaining style of rule evaluation.
-
-The system starts with known facts such as vehicle age and mileage and progressively applies rules until it derives the final price.
-
-</details>
-<details> <summary><b>Q5. Why use Rule-Based AI instead of Machine Learning?</b></summary>
-The main reasons are:
-
-No training dataset required
-Easy implementation
-Fast execution
-Highly explainable
-Easy to demonstrate in a laboratory
-Every prediction can be manually traced
-</details>
-<details> <summary><b>Q6. How do you prevent negative prices?</b></summary>
-Two constraints are used:
-
-Age depreciation has an 80% maximum.
-The final value cannot fall below 8% of the base price.
-</details>
-<details> <summary><b>Q7. How are invalid inputs handled?</b></summary>
-The Python program uses validation functions and try-except blocks to check:
-
-Manufacturing year
-Mileage
-Number of owners
-Fuel type
-Numeric input formats
-Invalid input causes the user to be prompted again instead of crashing the program.
-
-</details>
-📁 Project Structure
+```
 yugd/
 │
-├── 📄 index.html
-│   └── Web application structure
+├── index.html               # Web Application UI (HTML5 Semantic Layout & Controls)
+├── style.css                # Web Application Styling (Dark Glassmorphic Design System)
+├── app.js                   # Web AI Engine (JavaScript Implementation of Rules)
 │
-├── 🎨 style.css
-│   └── UI styling and responsive design
-│
-├── ⚡ app.js
-│   └── JavaScript rule engine
-│
-├── 🐍 car_price_predictor.py
-│   └── Python CLI expert system
-│
-└── 📖 README.md
-    └── Project documentation
+├── car_price_predictor.py   # Python CLI Lab Program (Knowledge Base + Inference Engine)
+└── README.md                # Comprehensive Lab Documentation & Viva Guide
+```
 
-🧩 Technologies Used
-┌─────────────────────────────────────┐
-│          TECHNOLOGY STACK           │
-├─────────────────────────────────────┤
-│ 🐍 Python 3.x                       │
-│ 🌐 HTML5                            │
-│ 🎨 CSS3                             │
-│ ⚡ JavaScript ES6                   │
-│ 🧠 Rule-Based Artificial Intelligence│
-└─────────────────────────────────────┘
+---
 
-📊 Advantages
-✅ Strengths
-Explainable — every prediction has a reason.
-Deterministic — same inputs produce the same result.
-Lightweight — no ML frameworks.
-Fast — calculations happen instantly.
-Easy to maintain — rules can be manually changed.
-Viva friendly — algorithm is easy to demonstrate.
-Offline capable — no external API is required.
-⚠️ Limitations
-A rule-based valuation system cannot automatically learn changing market trends.
+## 👨‍💻 Project Authors & Lab Submission
 
-The current system does not directly account for:
-
-Exact vehicle trim/variant
-Accident history
-Service records
-Geographic market differences
-Insurance status
-Tyre condition
-Vehicle modifications
-Current live marketplace listings
-Demand/supply fluctuations
-Therefore, the output should be considered a heuristic estimate, not a guaranteed market selling price.
-
-🔮 Future Improvements
-Possible future versions could add:
-
- 📊 Historical vehicle price dataset
- 🤖 Machine Learning comparison model
- 🌍 Location-based pricing
- 🚘 Exact variant detection
- 📷 Vehicle image inspection
- 🔧 Service-history scoring
- 📈 Market trend analysis
- ☁️ Cloud deployment
- 📱 Mobile application
- 🔄 Automatic rule updates
- 📊 Interactive price charts
-🏆 Learning Outcomes
-By completing this project, students learn:
-
-Rule-Based AI
-      ↓
-Expert Systems
-      ↓
-Knowledge Representation
-      ↓
-Inference Engines
-      ↓
-Heuristic Algorithms
-      ↓
-Input Validation
-      ↓
-Python Programming
-      ↓
-Web Development
-      ↓
-Explainable AI
-
-🧑‍🏫 Suitable For
-This project is suitable for:
-
-🎓 B.Tech
-🎓 BCA
-🎓 MCA
-🎓 B.Sc Computer Science
-🤖 Artificial Intelligence Laboratory
-🐍 Python Laboratory
-💻 Mini Projects
-🧪 Practical Examinations
-🎤 Viva Voce Demonstrations
-📌 Project Summary
-Category	Details
-Project	AI Car Price Predictor
-AI Paradigm	Rule-Based Expert System
-Programming	Python
-Frontend	HTML5 + CSS3 + JavaScript
-ML Required	❌ No
-External Dependencies	❌ None
-Inference	Forward-Chaining Style
-Output	Used-Car Price Estimate
-Explainability	✅ Full
-Interface	Web + CLI
-
-👨‍💻 Authors & Lab Submission
-Project Title:
-Car Price Predictor using Rule-Based AI
-
-Domain:
-Artificial Intelligence / Expert Systems
-
-Languages:
-Python 3.x • HTML5 • CSS3 • JavaScript ES6
-
-Project Type:
-College Laboratory / Mini Project
-
-<p align="center">
-🚗 Built with Python + Rules + AI
-No Black Box. No Training. Just Explainable AI.
-
-⭐ If this project helped you, consider giving the repository a star!
-
-</p> ```
-One improvement I'd strongly recommend
-Your current README calls the algorithm "forward chaining", which is reasonable as a description of the sequential rule evaluation, but technically this isn't a classical production-rule expert system unless your implementation actually represents facts/rules and fires them from a rule engine.
-
-For a college viva, the safest wording is:
-
-"The system uses a deterministic, sequential rule-based inference mechanism inspired by forward chaining."
-
-That prevents an examiner from challenging you with questions such as "Where is your agenda/conflict-resolution mechanism?" or "How are rules dynamically fired?" while still accurately describing your project.
-
-
-
+- **Project Title**: Car Price Predictor using Rule-Based AI
+- **Domain**: Artificial Intelligence / Expert Systems Mini-Project
+- **Language & Frameworks**: Python 3.x, HTML5, CSS3, ES6 JavaScript
+- **Standard**: Suitable for B.Tech / BCA / MCA / B.Sc Computer Science AI/Python Laboratory Mini-Projects.

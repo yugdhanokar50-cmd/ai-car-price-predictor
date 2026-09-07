@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Car Price Predictor | Rule-Based Expert System</title>
+  <meta name="description" content="AI-powered Used Car Resale Price Estimator using Rule-Based Expert System heuristics. No Machine Learning dependencies." />
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Background Glow Accents -->
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+  <div class="bg-glow bg-glow-3"></div>
+
+  <!-- Main Container -->
+  <div class="app-container">
+    
+    <!-- Top Navigation Bar -->
+    <header class="navbar">
+      <div class="logo-area">
+        <div class="logo-icon">
+          <i class="fa-solid fa-car-side"></i>
+        </div>
+        <div class="logo-text">
+          <h1>AutoValuate <span class="badge-ai">AI Engine</span></h1>
+          <p class="subtitle">Rule-Based Heuristic Expert System</p>
+        </div>
+      </div>
+      
+      <div class="nav-actions">
+        <button id="btn-open-rules" class="btn-secondary" title="View AI Knowledge Base & Heuristic Rules">
+          <i class="fa-solid fa-brain"></i>
+          <span>AI Rulebook & Viva</span>
+        </button>
+        <button id="btn-print-report" class="btn-outline" title="Print Valuation Certificate">
+          <i class="fa-solid fa-file-arrow-down"></i>
+          <span>Export Report</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Quick Preset Showcase Bar -->
+    <section class="preset-section">
+      <div class="preset-label">
+        <i class="fa-solid fa-bolt"></i> Quick Demo Presets:
+      </div>
+      <div class="preset-chips-scroll">
+        <button class="preset-chip active" data-preset="swift">
+          <span class="chip-icon">🚗</span> Maruti Swift (2018, Petrol)
+        </button>
+        <button class="preset-chip" data-preset="creta">
+          <span class="chip-icon">🚙</span> Hyundai Creta (2021, Diesel)
+        </button>
+        <button class="preset-chip" data-preset="innova">
+          <span class="chip-icon">🚐</span> Toyota Innova (2020, Diesel)
+        </button>
+        <button class="preset-chip" data-preset="nexon_ev">
+          <span class="chip-icon">⚡</span> Tata Nexon (2023, EV)
+        </button>
+        <button class="preset-chip" data-preset="city_cng">
+          <span class="chip-icon">🚕</span> Honda City (2019, CNG)
+        </button>
+        <button class="preset-chip" data-preset="bmw">
+          <span class="chip-icon">🏎️</span> BMW 3 Series (2022, Petrol)
+        </button>
+      </div>
+    </section>
+
+    <!-- Main App Grid -->
+    <main class="main-grid">
+      
+      <!-- Left Column: Input Form -->
+      <section class="card form-card">
+        <div class="card-header">
+          <div class="card-title">
+            <i class="fa-solid fa-sliders"></i>
+            <h2>Vehicle Parameters</h2>
+          </div>
+          <div class="live-indicator">
+            <span class="pulse-dot"></span> Real-Time AI Inference
+          </div>
+        </div>
+
+        <form id="car-form" onsubmit="return false;">
+          
+          <!-- Brand & Model Input -->
+          <div class="form-row dual-col">
+            <div class="form-group">
+              <label for="brand-select">
+                <i class="fa-solid fa-building"></i> Car Brand / Make
+              </label>
+              <div class="select-wrapper">
+                <select id="brand-select" class="form-control">
+                  <option value="Maruti Suzuki">Maruti Suzuki</option>
+                  <option value="Hyundai">Hyundai</option>
+                  <option value="Tata">Tata Motors</option>
+                  <option value="Toyota">Toyota</option>
+                  <option value="Honda">Honda</option>
+                  <option value="Mahindra">Mahindra</option>
+                  <option value="Kia">Kia</option>
+                  <option value="Volkswagen">Volkswagen</option>
+                  <option value="Skoda">Skoda</option>
+                  <option value="MG">MG</option>
+                  <option value="Renault">Renault</option>
+                  <option value="Nissan">Nissan</option>
+                  <option value="Ford">Ford</option>
+                  <option value="BMW">BMW (Luxury)</option>
+                  <option value="Mercedes-Benz">Mercedes-Benz (Luxury)</option>
+                  <option value="Audi">Audi (Luxury)</option>
+                  <option value="Volvo">Volvo (Luxury)</option>
+                  <option value="Jaguar">Jaguar (Luxury)</option>
+                  <option value="Other">Other / Custom</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="model-input">
+                <i class="fa-solid fa-car"></i> Model Variant
+              </label>
+              <input type="text" id="model-input" class="form-control" placeholder="e.g. Swift VXi, Creta SX" value="Swift VXi" required />
+            </div>
+          </div>
+
+          <!-- Manufacturing Year (Slider + Number) -->
+          <div class="form-group">
+            <div class="label-with-badge">
+              <label for="year-slider">
+                <i class="fa-regular fa-calendar-days"></i> Manufacturing Year
+              </label>
+              <div class="badge-tag" id="age-badge">Age: 8 Years</div>
+            </div>
+            <div class="range-container">
+              <input type="range" id="year-slider" class="range-slider" min="1995" max="2026" value="2018" step="1" />
+              <div class="range-value-box">
+                <span id="year-display">2018</span>
+              </div>
+            </div>
+            <div class="range-ticks">
+              <span>1995</span>
+              <span>2005</span>
+              <span>2015</span>
+              <span>2020</span>
+              <span id="max-year-tick">2026</span>
+            </div>
+          </div>
+
+          <!-- Kilometers Driven (Slider + Quick Chips) -->
+          <div class="form-group">
+            <div class="label-with-badge">
+              <label for="km-slider">
+                <i class="fa-solid fa-gauge-high"></i> Kilometers Driven
+              </label>
+              <div class="badge-tag badge-cyan" id="km-category-badge">Moderate Wear (20k-50k)</div>
+            </div>
+            <div class="range-container">
+              <input type="range" id="km-slider" class="range-slider" min="0" max="250000" value="45000" step="1000" />
+              <div class="range-value-box">
+                <span id="km-display">45,000</span> <small>km</small>
+              </div>
+            </div>
+            <div class="quick-chips-group">
+              <button type="button" class="quick-chip" data-km="15000">15k km</button>
+              <button type="button" class="quick-chip active" data-km="45000">45k km</button>
+              <button type="button" class="quick-chip" data-km="80000">80k km</button>
+              <button type="button" class="quick-chip" data-km="120000">120k km</button>
+              <button type="button" class="quick-chip" data-km="180000">180k+ km</button>
+            </div>
+          </div>
+
+          <!-- Fuel Type (Segmented Buttons) -->
+          <div class="form-group">
+            <label><i class="fa-solid fa-gas-pump"></i> Fuel Type</label>
+            <div class="segmented-control" id="fuel-group">
+              <label class="segment-btn active">
+                <input type="radio" name="fuel" value="Petrol" checked />
+                <span class="seg-icon">⛽</span>
+                <span class="seg-name">Petrol</span>
+                <span class="seg-adj">Baseline</span>
+              </label>
+              <label class="segment-btn">
+                <input type="radio" name="fuel" value="Diesel" />
+                <span class="seg-icon">🛢️</span>
+                <span class="seg-name">Diesel</span>
+                <span class="seg-adj highlight-green">+5% Value</span>
+              </label>
+              <label class="segment-btn">
+                <input type="radio" name="fuel" value="CNG" />
+                <span class="seg-icon">🔋</span>
+                <span class="seg-name">CNG</span>
+                <span class="seg-adj highlight-yellow">-3% Wear</span>
+              </label>
+              <label class="segment-btn">
+                <input type="radio" name="fuel" value="Electric" />
+                <span class="seg-icon">⚡</span>
+                <span class="seg-name">Electric</span>
+                <span class="seg-adj highlight-green">+8% Tech</span>
+              </label>
+              <label class="segment-btn">
+                <input type="radio" name="fuel" value="Hybrid" />
+                <span class="seg-icon">🍃</span>
+                <span class="seg-name">Hybrid</span>
+                <span class="seg-adj highlight-green">+6% Eco</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Ownership History (Segmented Buttons) -->
+          <div class="form-group">
+            <label><i class="fa-solid fa-user-check"></i> Ownership History</label>
+            <div class="segmented-control owners-group" id="owner-group">
+              <label class="segment-btn">
+                <input type="radio" name="owners" value="1" />
+                <span class="seg-name">1st Owner</span>
+                <span class="seg-adj highlight-green">0% Penalty</span>
+              </label>
+              <label class="segment-btn active">
+                <input type="radio" name="owners" value="2" checked />
+                <span class="seg-name">2nd Owner</span>
+                <span class="seg-adj highlight-yellow">-7% Drop</span>
+              </label>
+              <label class="segment-btn">
+                <input type="radio" name="owners" value="3" />
+                <span class="seg-name">3rd Owner</span>
+                <span class="seg-adj highlight-orange">-15% Drop</span>
+              </label>
+              <label class="segment-btn">
+                <input type="radio" name="owners" value="4" />
+                <span class="seg-name">4+ Owners</span>
+                <span class="seg-adj highlight-red">-25% Drop</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Custom Ex-Showroom Toggle -->
+          <div class="accordion-toggle-wrap">
+            <label class="checkbox-toggle">
+              <input type="checkbox" id="custom-price-toggle" />
+              <span class="toggle-slider"></span>
+              <span class="toggle-text">Specify exact original new car price (Optional)</span>
+            </label>
+            
+            <div id="custom-price-container" class="custom-price-container hidden">
+              <div class="form-group">
+                <label for="custom-price-input">
+                  <i class="fa-solid fa-indian-rupee-sign"></i> Original Ex-Showroom Price (₹)
+                </label>
+                <div class="input-with-symbol">
+                  <span class="currency-sym">₹</span>
+                  <input type="number" id="custom-price-input" class="form-control" placeholder="e.g. 850000" min="50000" max="50000000" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Reset / Predict Buttons -->
+          <div class="form-actions">
+            <button type="button" id="btn-reset" class="btn-ghost">
+              <i class="fa-solid fa-rotate-left"></i> Reset Defaults
+            </button>
+            <button type="button" id="btn-recalculate" class="btn-primary">
+              <i class="fa-solid fa-calculator"></i> Recalculate AI Valuation
+            </button>
+          </div>
+
+        </form>
+      </section>
+
+      <!-- Right Column: AI Valuation Results Dashboard -->
+      <section class="results-column">
+        
+        <!-- Main Valuation Output Card -->
+        <div class="card result-card" id="printable-result-card">
+          
+          <div class="result-top-banner">
+            <div class="ai-status">
+              <i class="fa-solid fa-microchip"></i>
+              <span>AI Rule-Based Valuation Summary</span>
+            </div>
+            <div class="timestamp-tag" id="current-timestamp">Live Valuation</div>
+          </div>
+
+          <!-- Vehicle Title -->
+          <div class="evaluated-car-header">
+            <h3 id="result-car-title">Maruti Suzuki Swift</h3>
+            <p id="result-car-subtitle">2018 Model • 45,000 km • Petrol • 2nd Owner</p>
+          </div>
+
+          <!-- Hero Price Display -->
+          <div class="price-hero-box">
+            <div class="price-label">ESTIMATED RESALE VALUE</div>
+            <div class="price-main-val">
+              <span class="currency-sign">₹</span>
+              <span id="final-price-formatted">1,93,440</span>
+            </div>
+            <div class="price-sub-val">
+              <span id="final-price-lakhs">Approx. ₹ 1.93 Lakhs INR</span>
+            </div>
+          </div>
+
+          <!-- Valuation Metrics Bar -->
+          <div class="metrics-grid">
+            <div class="metric-item">
+              <div class="metric-label">Original Base Benchmark</div>
+              <div class="metric-val" id="metric-base-price">₹ 6,50,000</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-label">Value Retained</div>
+              <div class="metric-val highlight-green" id="metric-retention">29.8%</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-label">Market Resale Tier</div>
+              <div class="metric-val highlight-cyan" id="metric-resale-tier">Fair Resale</div>
+            </div>
+          </div>
+
+          <!-- Visual Retention Bar -->
+          <div class="retention-bar-wrap">
+            <div class="retention-bar-header">
+              <span>Overall Value Retention</span>
+              <span id="retention-bar-pct">29.8%</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill" id="retention-progress-fill" style="width: 29.8%;"></div>
+            </div>
+          </div>
+
+          <!-- Step-by-Step AI Deduction Waterfall -->
+          <div class="ai-breakdown-section">
+            <div class="breakdown-header">
+              <h4><i class="fa-solid fa-network-wired"></i> Step-by-Step AI Inference Breakdown</h4>
+              <span class="info-pill">Deterministic Heuristics</span>
+            </div>
+
+            <div class="waterfall-list" id="waterfall-container">
+              <!-- Dynamically populated by app.js -->
+            </div>
+          </div>
+
+          <!-- Status / Residual Safety Note -->
+          <div class="ai-safety-note" id="ai-status-note">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>All AI heuristic constraints and market residual safety factors validated.</span>
+          </div>
+
+        </div>
+
+        <!-- Comparative Insights Mini Card -->
+        <div class="card insights-card">
+          <div class="card-title">
+            <i class="fa-solid fa-lightbulb"></i>
+            <h3>AI Valuation Insights & Advice</h3>
+          </div>
+          <ul class="insights-list" id="insights-list">
+            <li>
+              <i class="fa-solid fa-circle-info highlight-cyan"></i>
+              <span><strong>Age Impact:</strong> Car has entered the 8-year age bracket, which accounts for the largest chunk of overall depreciation.</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-circle-check highlight-green"></i>
+              <span><strong>Mileage Advantage:</strong> 45,000 km is well below the expected 80,000 km threshold for an 8-year-old car, preserving value.</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-triangle-exclamation highlight-yellow"></i>
+              <span><strong>Ownership Factor:</strong> Being a 2nd owner vehicle carries a minor 7% market transfer deduction.</span>
+            </li>
+          </ul>
+        </div>
+
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <div class="footer-left">
+        <p><strong>Car Price Predictor using AI</strong> • Python & Web Lab Project</p>
+        <p class="footer-sub">Rule-Based Expert System Architecture • Zero Machine Learning Libraries</p>
+      </div>
+      <div class="footer-right">
+        <span class="badge-outline">Python 3.x Lab Ready</span>
+        <span class="badge-outline">Deterministic AI Heuristics</span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- AI RULEBOOK & VIVA MODAL -->
+  <div class="modal-backdrop" id="rules-modal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-title">
+          <i class="fa-solid fa-graduation-cap"></i>
+          <h3>AI Knowledge Base & College Viva Guide</h3>
+        </div>
+        <button class="btn-close-modal" id="btn-close-rules">&times;</button>
+      </div>
+      
+      <div class="modal-body">
+        
+        <!-- Tab 1: AI Concept -->
+        <div class="modal-section">
+          <h4><i class="fa-solid fa-brain"></i> 1. The AI Concept (How to explain in Viva)</h4>
+          <blockquote class="viva-quote">
+            "This project uses a <strong>Rule-Based AI Expert System</strong>. Instead of training an opaque statistical Machine Learning model on a dataset, it uses an expert-curated <strong>Knowledge Base</strong> and a deterministic <strong>Inference Engine</strong> that applies heuristic IF-THEN rules to evaluate factors like vehicle age, odometer mileage, fuel efficiency, and ownership history."
+          </blockquote>
+        </div>
+
+        <!-- Tab 2: Architecture -->
+        <div class="modal-section">
+          <h4><i class="fa-solid fa-diagram-project"></i> 2. Expert System Architecture</h4>
+          <div class="architecture-grid">
+            <div class="arch-card">
+              <h5>Knowledge Base</h5>
+              <p>Contains domain market benchmarks for economy, mid-range, and luxury automotive brands.</p>
+            </div>
+            <div class="arch-card">
+              <h5>Inference Engine</h5>
+              <p>Sequentially executes depreciation curves, fuel multipliers, and ownership penalties.</p>
+            </div>
+            <div class="arch-card">
+              <h5>Explanation Facility</h5>
+              <p>Generates the transparent step-by-step calculation breakdown shown on the dashboard.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Heuristic Rules Table -->
+        <div class="modal-section">
+          <h4><i class="fa-solid fa-table-list"></i> 3. Heuristic Rules Matrix</h4>
+          <div class="table-responsive">
+            <table class="rules-table">
+              <thead>
+                <tr>
+                  <th>Rule Step</th>
+                  <th>Factor Evaluated</th>
+                  <th>Applied Heuristic Rule</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Rule 1</strong></td>
+                  <td>Brand Base Benchmark</td>
+                  <td>Matches brand to known price tier (Maruti: ₹6.5L, Hyundai: ₹7.5L, Toyota: ₹12L, Luxury: ₹35L+).</td>
+                </tr>
+                <tr>
+                  <td><strong>Rule 2</strong></td>
+                  <td>Vehicle Age Drop</td>
+                  <td>Year 1: 15% | Years 2–5: 8%/yr | Years 6–10: 5%/yr | Max capped at 80%.</td>
+                </tr>
+                <tr>
+                  <td><strong>Rule 3</strong></td>
+                  <td>Kilometers Wear</td>
+                  <td>&lt;20k km: 2% | 20k–50k km: 6% | 50k–100k km: 12% | 100k–150k km: 20% | &gt;150k km: 28%.</td>
+                </tr>
+                <tr>
+                  <td><strong>Rule 4</strong></td>
+                  <td>Fuel Adjustment</td>
+                  <td>Diesel: +5% | Petrol: 0% | CNG: -3% | Electric: +8% | Hybrid: +6%.</td>
+                </tr>
+                <tr>
+                  <td><strong>Rule 5</strong></td>
+                  <td>Ownership History</td>
+                  <td>1st Owner: 0% | 2nd Owner: -7% | 3rd Owner: -15% | 4+ Owners: -25%.</td>
+                </tr>
+                <tr>
+                  <td><strong>Safety</strong></td>
+                  <td>Residual Floor</td>
+                  <td>Ensures car always retains at least 8% of original base price as scrap/utility value.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Tab 4: Common Viva Questions -->
+        <div class="modal-section">
+          <h4><i class="fa-solid fa-circle-question"></i> 4. Top Viva Questions & Answers</h4>
+          <div class="faq-item">
+            <p class="faq-q"><strong>Q: Why is Rule-Based AI chosen over Machine Learning here?</strong></p>
+            <p class="faq-a"><strong>A:</strong> Rule-based systems provide 100% explainability, require zero training data or GPUs, never overfit, and have deterministic results ideal for structured domain rules.</p>
+          </div>
+          <div class="faq-item">
+            <p class="faq-q"><strong>Q: Can the price ever drop below zero?</strong></p>
+            <p class="faq-a"><strong>A:</strong> No. The algorithm enforces a safety residual floor of 8% of the base price to represent structural scrap and parts value.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-primary" id="btn-close-rules-bottom">Got it, Close Guide</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom JavaScript Logic -->
+  <script src="app.js"></script>
+</body>
+</html>
