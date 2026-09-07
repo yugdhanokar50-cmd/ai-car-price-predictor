@@ -37,6 +37,22 @@ While statistical Machine Learning models treat price prediction as a "black box
 - **Resilience & Safety**: Enforces input validation and a minimum residual asset floor (8% scrap value) to prevent negative or zero valuations.
 
 ---
+## 🚀 Live Demo
+
+> Try the deployed application here:
+
+👉 **[AI Car Price Predictor – Live Demo](https://ai-car-price-predictor-4.onrender.com)**
+
+The application uses a rule-based AI expert system to estimate a vehicle's resale value based on:
+- 🚗 Car brand and model
+- 📅 Manufacturing year
+- 🛣️ Kilometers driven
+- ⛽ Fuel type
+- 👤 Ownership history
+- 💰 Original car price
+
+[View Live Project](https://ai-car-price-predictor-4.onrender.com)
+
 
 ## 🧠 AI Concept: Rule-Based AI vs Machine Learning
 
